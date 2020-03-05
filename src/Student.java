@@ -14,7 +14,6 @@ public class Student {
     this.name = name;
     count++;
     totalRating = totalRating + rating;
-
   }
 
   public static double getAvgRating() {
@@ -74,12 +73,10 @@ public class Student {
     student1.setRating(3);
     student2.setRating(5);
     student3.setRating(8);
-    double oldRating = getAvgRating();
-    System.out.println(oldRating);
+    System.out.println(getAvgRating());
     student1.changeRating(2);
-    double newRating = getAvgRating();
-    System.out.println(newRating);
-    System.out.println(student1.toString());
+    System.out.println(getAvgRating());
+
 
   }
 }
