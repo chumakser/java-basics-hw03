@@ -1,50 +1,85 @@
-public class Student {
-  int rating;
-  private String name;
 
-  // TODO implement Student class according to the instructions provided in the README.md file
+public class Student {
+  private int rating;
+  private String name;
+  private static int count = 0;
+  private static double totalRating = 0;
 
   public Student(String name) {
-    //TODO initialize name
+    this.name = name;
+    count++;
+  }
+
+  public Student(String name, int rating){
+    this.name = name;
+    count++;
+    totalRating = totalRating + rating;
+
   }
 
   public static double getAvgRating() {
-    // TODO return average rating of all students
-    return 0;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    // TODO set student's name
-  }
-
-  public int getRating() {
+    double rating = 0;
+    double allRating = totalRating;
+    int numberOfStudents = count;
+    if (numberOfStudents>0) {
+      rating = allRating/count;
+    }
     return rating;
   }
 
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getRating() {
+    return this.rating;
+  }
+
   public void setRating(int rating) {
-    // TODO initialize rating;
+    this.rating = rating;
+    totalRating = totalRating + rating;
   }
 
   public boolean betterStudent(Student student) {
-    // TODO return the result of comparing this.student's rating with the student's rating
-    return false;
+    int oldRating = getRating();
+    int newRating = student.getRating();
+    return oldRating >= newRating;
   }
 
   public void changeRating(int rating) {
-    // TODO change this student's rating and average rating of all students
+    int oldRating = getRating();
+    this.rating = rating;
+    totalRating = totalRating - oldRating + rating;
+
   }
 
   public static void removeStudent(Student student) {
-    // TODO remove student
+    count--;
+    totalRating = totalRating - student.rating;
   }
 
   @Override
   public String toString() {
-    // TODO return String with name and rating of this student
-    return "";
+    return "Rating of " + name + " is " + Integer.toString(rating) ;
+  }
+
+  public static void main(String args[]){
+    Student student1 = new Student("Petro");
+    Student student2 = new Student("Volodko");
+    Student student3 = new Student("Ivan");
+    student1.setRating(3);
+    student2.setRating(5);
+    student3.setRating(8);
+    double oldRating = getAvgRating();
+    System.out.println(oldRating);
+    student1.changeRating(2);
+    double newRating = getAvgRating();
+    System.out.println(newRating);
+    System.out.println(student1.toString());
+
   }
 }
